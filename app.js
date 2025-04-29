@@ -43,7 +43,7 @@ const upload = multer({ storage: storage,
 
 const from = process.env.EMAIL_FROM;
 const to = process.env.EMAIL_TO;
-const subject = 'Envoyé depuis le serveur';
+const subject = 'Nouveau Message de alpinealuminiuminc.com';
 
 const transport = nodeMailer.createTransport({
     host: process.env.SMTP_HOST,
@@ -72,12 +72,12 @@ app.post('/send-email', upload.array('attachment', 5), (req, res) => {
     from,
     to,
     subject,
-    text: `
-      Nom: ${nom}
-      Numero: ${Numero}
-      Courriel: ${courriel}
-      Message: ${message}
-    `,
+    html: `
+    <p><strong>Nom:</strong> ${nom}</p>
+    <p><strong>Numéro:</strong> ${Numero}</p>
+    <p><strong>Courriel:</strong> ${courriel}</p>
+    <p><strong>Message:</strong><br/>${message.replace(/\n/g, "<br/>")}</p>
+  `,
     attachments: files ? files.map(file => ({ filename: file.originalname, path: file.path })) : []
   };
 
