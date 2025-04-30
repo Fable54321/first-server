@@ -72,6 +72,7 @@ app.post('/send-email', upload.array('attachment', 5), (req, res) => {
     from,
     to,
     subject,
+    replyTp: courriel,
     html: `
     <p><strong>Nom:</strong> ${nom}</p>
     <p><strong>Numéro:</strong> ${Numero}</p>
